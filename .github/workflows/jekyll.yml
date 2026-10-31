@@ -46,12 +46,16 @@ jobs:
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@v6.0.0
+        # Pages has to be enabled in the repository settings (Settings > Pages > Source: GitHub Actions)
+        # by a user with admin rights; the build must not depend on that step succeeding.
+        continue-on-error: true
         with:
-          # Enable GitHub Pages (Actions build type) for this repository if it is not enabled yet
+          # Enable GitHub Pages (Actions build type) if the workflow token is allowed to do so
           enablement: true
       - name: Build with Jekyll
-        # Outputs to the './_site' directory by default
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        # Outputs to the './_site' directory by default.
+        # Falls back to the repository subpath configured in _config.yml when Pages is not enabled yet.
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path || '/LJT-Homepage' }}"
         env:
           JEKYLL_ENV: production
       - name: Upload GitHub Pages artifact
