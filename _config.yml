@@ -82,12 +82,13 @@ author:
   youtube          :
   zhihu            :
 
-# Publication Category - The following the list of publication categories and their headings
+# Publication Category - The following the list of publication categories and their headings.
+# Categories are rendered in this order, newest publications first within each category.
 publication_category:
-  conferences:
-    title: 'Conference Papers'
   manuscripts:
     title: 'Preprints'
+  conferences:
+    title: 'Conference Papers'
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/ for social media previews
